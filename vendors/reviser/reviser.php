@@ -1590,6 +1590,7 @@ $tmp.=$this->_makeImageOBJ($sn);
 		$sspos =12;
 		$sstnum=0;
 		$limit=$pos + $length +4;
+        
 		while ($sstnum < $numref) {
 			if ($pos+$sspos+2 > $limit) {
 				if ($this->__get2($dat,$limit) == Type_CONTINUE) {
@@ -1691,7 +1692,7 @@ $tmp.=$this->_makeImageOBJ($sn);
 		}
 //print_r($sstarray);
 //exit;
-		return $sstarray;
+		return @$sstarray;
 	}
 
 	/**

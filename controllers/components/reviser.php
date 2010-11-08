@@ -45,10 +45,26 @@ class ReviserComponent extends Object {
      * 
      * @param $reviser リバイザ オブジェクト
      * @param $template リバイザテンプレート
-     * @param $outFile 出力ファイル名
+     * @param $outFile 出力ファイル名(nullの場合はリバイザテンプレート名を使用する[default:null])
      * @param $path サーバローカルに出力する場合のパス(nullの場合はWeb出力[default:null])
      */
-    public function outPut($template, $outFile, $path = null){
+    public function outPut($template, $outFile = null, $path = null){
+        if(is_null($outFile)){
+            $count = substr_count($template, '/');
+            if($count != 0){
+                // テンプレートがパスになっている
+                
+                // ファイル名のみを使用する
+                $arr = explode('/', $template);
+                $outFile = $arr[$count];
+            }else{
+                // テンプレートファイル名である
+                
+                // 出力ファイル名にテンプレートファイル名を使用する
+                $outFile = $template;
+            }
+        }
+        
         // テンプレートパス
         $readfile = sprintf("%s%s", REVISER_TEMPLATE_PATH, $template);
 
